@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/responsive.dart';
 import 'package:flutter/material.dart';
@@ -22,15 +24,25 @@ class Header extends StatelessWidget {
           ),
         if (!Responsive.isMobile(context))
           Text(
-            "Dashboard",
+            "LifeIs",
             style: Theme.of(context).textTheme.headline6,
           ),
+        if (!Responsive.isMobile(context)) TimeTable(),
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
         Expanded(child: SearchField()),
         ProfileCard()
       ],
     );
+  }
+}
+
+class TimeTableState extends State<
+class TimeTable extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }
 
