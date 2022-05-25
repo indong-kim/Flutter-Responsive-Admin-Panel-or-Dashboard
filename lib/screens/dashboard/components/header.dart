@@ -1,6 +1,5 @@
-import 'dart:html';
-
 import 'package:admin/controllers/MenuController.dart';
+import 'package:admin/logic/provider/TimeChangeNotifier.dart';
 import 'package:admin/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,6 +28,10 @@ class Header extends StatelessWidget {
           ),
         if (!Responsive.isMobile(context)) TimeTable(),
         if (!Responsive.isMobile(context))
+            ElevatedButton(onPressed: ()=>{
+              Provider.of<TimeChangeNotifier>(context,listen: false).oneday()
+            }, child: Text('진행')),
+        if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
         Expanded(child: SearchField()),
         ProfileCard()
@@ -37,13 +40,18 @@ class Header extends StatelessWidget {
   }
 }
 
-class TimeTableState extends State<
+class TimeTableState extends State<TimeTable> {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<TimeChangeNotifier>(
+      builder: (context, value, child) => Text(value.today.toString())
+    );
+  }
+}
+
 class TimeTable extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
+  State<StatefulWidget> createState() => TimeTableState();
 }
 
 class ProfileCard extends StatelessWidget {
