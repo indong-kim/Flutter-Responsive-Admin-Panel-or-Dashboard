@@ -28,9 +28,9 @@ class Header extends StatelessWidget {
           ),
         if (!Responsive.isMobile(context)) TimeTable(),
         if (!Responsive.isMobile(context))
-            ElevatedButton(onPressed: ()=>{
-              Provider.of<TimeChangeNotifier>(context,listen: false).oneday()
-            }, child: Text('진행')),
+          Consumer<TimeChangeNotifier>(builder: (context, value, child) => ElevatedButton(onPressed: ()=>{
+            value.oneday()
+          }, child: Text('진행')),)
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
         Expanded(child: SearchField()),
